@@ -1,0 +1,4 @@
+---
+all__ssh_keys__to_merge:
+  - comment: nick
+    key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJrryeA5Nj8TJzX0hjujDQvrrBRpDFjhGJKn297zhoij nick@systemli.org

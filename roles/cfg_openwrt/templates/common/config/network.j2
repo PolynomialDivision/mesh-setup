@@ -1,0 +1,66 @@
+#jinja2: trim_blocks: "true", lstrip_blocks: "true"
+{% set profile = wireless_profiles | selectattr('name', 'equalto', wireless_profile) | list | first %}
+{% set wifi_networks = profile | json_query('ifaces[].network') | default([], true) %}
+
+config interface 'loopback'
+	option ifname 'lo'
+	option proto 'static'
+	option ipaddr '127.0.0.1'
+	option netmask '255.0.0.0'
+{% if role == 'corerouter' %}
+	option dns '{{ dns_servers | join(' ') }}'
+  {% if ipv6_prefix is defined %}
+	option ip6addr '{{ ipv6_prefix }}'
+  {% endif %}
+{% endif %}
+
+{% if dsa_ports is defined %}
+  {% include './common/config/dsa.network.inc' %}
+{% elif switch_ports|default(0) > 0 %}
+  {% include './common/config/swconfig.network.inc' %}
+{% endif %}
+
+
+{% for network in networks %}
+  {% set name = network['name'] if 'name' in network else network['role'] %}
+  {% if (role == 'corerouter' and network['role'] == 'mesh') or ('assignments' in network and inventory_hostname in network['assignments'])
+     or name in wifi_networks
+     or network.get('mesh_ap') == inventory_hostname %}
+config interface '{{ name }}'
+	option ifname '{{ 'switch0' if dsa_ports is defined else int_port }}.{{ network['vid'] }}'
+    {% if 'assignments' in network and inventory_hostname in network['assignments'] %}
+	option proto 'static'
+	option ipaddr '{{ network['prefix'] | ipsubnet('32', network['assignments'][inventory_hostname]) }}'
+        {% if network.get('enforce_client_isolation') %}
+	option macaddr '02:00:00:00:00:01'
+        {% endif %}
+	{% if role != "corerouter" and 'dns' in network %}
+	option dns '{{ network['prefix'] | ipaddr(network['dns']) | ipaddr('address') }}'
+        {% endif %}
+	{% if 'gateway' in network and network['assignments'][inventory_hostname] != network['gateway'] %}
+	option gateway '{{ network['prefix'] | ipaddr(network['gateway']) | ipaddr('address') }}'
+        {% endif %}
+    {% elif role == 'corerouter' and network['role'] == 'mesh' %}
+	option proto 'static'
+	option ipaddr '{{ network['prefix'] }}'
+    {% else %}
+	option proto 'none'
+    {% endif %}
+    {% if name in wifi_networks or network.get('mesh_ap') == inventory_hostname %}
+        option type 'bridge'
+    {% endif %}
+  {% endif %}
+  {% if role == 'corerouter' and ipv6_prefix is defined %}
+    {% if 'ipv6_subprefix' in network %}
+      {% set subprefix = ipv6_prefix | ipsubnet('64', network['ipv6_subprefix']) %}
+	option ip6addr '{{ subprefix | ipaddr(network['ipv6_assigments'][inventory_hostname]) | ipaddr('address') }}/128'
+    {% endif %}
+  {% endif %}
+
+{% endfor %}
+{% for i in mac_override|default({}) %}
+config device '{{ i }}_dev'
+	option name '{{ i }}'
+	option macaddr '{{ mac_override[i] }}'
+
+{% endfor %}

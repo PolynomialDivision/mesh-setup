@@ -1,0 +1,17 @@
+---
+ipv6_prefix: "2000::/56"
+
+networks:
+  - vid: 20
+    role: mesh
+    name: mesh_network
+    ipv6_subprefix: 0
+    mesh_metric: 2048
+    mesh_iface: mesh
+    prefix: 10.0.0.0/24
+    assignments:
+      mountain-ap1: 1
+      mountain-ap2: 2
+    ipv6_assigments:
+      mountain-ap1: 1
+      mountain-ap2: 2

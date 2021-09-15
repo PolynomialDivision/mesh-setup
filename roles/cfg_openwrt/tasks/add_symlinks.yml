@@ -1,0 +1,6 @@
+---
+- name: Create rc.d directory
+  file:
+    state: directory
+    path: "{{ config_path }}/etc/rc.d"
+  when: role == "corerouter" or role == "ap"

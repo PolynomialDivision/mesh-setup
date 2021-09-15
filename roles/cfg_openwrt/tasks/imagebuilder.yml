@@ -1,0 +1,116 @@
+---
+- name: Create Download directory
+  file:
+    path: "{{ imagebuilder_dir }}"
+    state: directory
+  run_once: yes
+
+- name: set destination path for imagebuilder
+  set_fact:
+    imagebuilder_path: "{{ imagebuilder_dir }}/{{ imagebuilder | basename }}"
+
+- name: Download Imagebuilder if upstream is newer
+  command:
+    chdir: "{{ imagebuilder_dir }}"
+    argv:
+      - "wget"
+      - "-N"
+      - "{{ imagebuilder }}"
+  when: '"http" in imagebuilder'
+
+- name: Copy Local Imagebuilder
+  command:
+    argv:
+      - "cp"
+      - "{{ imagebuilder }}"
+      - "{{ imagebuilder_dir }}"
+  when: '"http" not in imagebuilder'
+
+- name: Clear workdir
+  file:
+    state: absent
+    path: "{{ imagebuild_dir }}"
+
+- name: (Re)-Create workdir
+  file:
+    state: directory
+    path: "{{ imagebuild_dir }}"
+
+- name: Extract imagebuilder
+  unarchive:
+    src: "{{ imagebuilder_path }}"
+    dest: "{{ imagebuild_dir }}"
+    extra_opts: ['--strip=1']
+
+- name: Read instruction set
+  shell:
+    chdir: "{{ imagebuild_dir }}"
+    cmd: grep -oP 'CONFIG_TARGET_ARCH_PACKAGES="\K[^"]+' .config
+  register: instr_set_result
+  when: 'instr_set is not defined and feed_version is defined'
+
+- name: Extract Instruction set if needed
+  set_fact:
+    instr_set: "{{ instr_set_result.stdout_lines|first }}"
+  when: 'instr_set is not defined and feed_version is defined'
+
+- name: Insert falter feed
+  lineinfile:
+    path: "{{ imagebuild_dir }}/repositories.conf"
+    line: "{{ feed | replace('__INSTR_SET__', instr_set) | replace('__FEED_VERSION__', feed_version) }}"
+  when: 'feed_version is defined'
+
+- name: Disable Signature verification if required
+  lineinfile:
+    path: "{{ imagebuild_dir }}/repositories.conf"
+    line: "option check_signature"
+    state: "absent"
+  when: 'imagebuilder_disable_signature_check is defined and imagebuilder_disable_signature_check'
+
+- name: Run Imagebuilder
+  command:
+    chdir: "{{ imagebuild_dir }}"
+    argv:
+      - "make"
+      - "image"
+      - "PROFILE={{ override_target|default(model) }}"
+      - "PACKAGES={{ packages | join(' ') }}"
+      - "DISABLED_SERVICES={{ disabled_services | join(' ') }}"
+      - "FILES={{ config_path }}"
+  register: output
+
+- name: Clear imagedir
+  file:
+    state: absent
+    path: "{{ image_dir}}"
+
+- name: (Re)-Create image dir
+  file:
+    state: directory
+    path: "{{ image_dir }}"
+  run_once: yes
+
+- name: Write build log to output dir
+  copy:
+    content: "{{ output.stdout }}"
+    dest: "{{ image_dir }}/{{ inventory_hostname }}.log"
+
+- name: Find output image
+  find:
+    paths: "{{ imagebuild_dir }}/bin/"
+    patterns: "*-sysupgrade.*"
+    recurse: true
+  register: image_list
+
+- name: Declare source
+  set_fact:
+    image_src: "{{ image_list.files | map(attribute='path') | list | first }}"
+
+- name: Declare target
+  set_fact:
+    image: "{{ image_dir }}/{{ inventory_hostname }}{{ image_src | splitext | last }}"
+
+- name: Copy Image to Image dir
+  copy:
+    src: "{{ image_src }}"
+    dest: "{{ image }}"
