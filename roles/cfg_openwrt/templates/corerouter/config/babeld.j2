@@ -7,13 +7,16 @@ config general
 	option 'ipv6_subtrees' 'true'
 	option 'ubus_bindings' 'true'
 
-  {% for network in networks | selectattr('role', 'equalto', 'mesh') | selectattr('ipv6_subprefix') %}
 config interface
-	option 'ifname' '{{ network['name'] if 'name' in network else network['role'] }}'
-	option 'rxcost' '{{ network['mesh_metric'] if 'mesh_metric' in network else '512' }}'
-	option 'split_horizon' '{{ (network['ptp'] if 'ptp' in network else false ) | string | lower }}'
+	option 'ifname' 'wlan2-mesh'
 
-  {% endfor -%}
+{% for network in networks %}
+config filter
+	option 'type'	'redistribute'
+	option 'ip'		'{{ network['prefix'] | ipsubnet('32', network['assignments'][inventory_hostname]) }}'
+	option 'local'  'true'
+	option 'eq'		'32'
+{% endfor %}
 
 config filter
 	option 'type'	'redistribute'

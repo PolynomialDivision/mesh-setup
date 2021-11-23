@@ -54,7 +54,7 @@ config wifi-iface '{{ wd_id }}_if{{ loop.index0 }}'
     {% endif %}
 	option ifname '{{ wd['ifname_hint'] }}-{{ iface['ifname_hint']|default('if' + loop.index0|string) }}'
     {% if 'mode' in iface %}
-	option mode '{{ iface['mode'] }}'
+	option mode 'adhoc'
     {% endif %}
     {% if 'encryption' in iface %}
 	option encryption '{{ iface['encryption'] }}'
@@ -86,10 +86,7 @@ config wifi-iface '{{ wd_id }}_if{{ loop.index0 }}'
     {% endif %}
     {% if iface['mode'] == 'mesh'  %}
       {% if 'mesh_id' in iface %}
-	option mesh_id '{{ iface['mesh_id'] }}'
-      {% endif %}
-      {% if 'mesh_fwding' in iface %}
-	option mesh_fwding '{{ iface['mesh_fwding'] }}'
+	option ssid '{{ iface['mesh_id'] }}'
       {% endif %}
       {% if 'mcast_rate' in iface %}
 	option mcast_rate '{{ iface['mcast_rate'] }}'

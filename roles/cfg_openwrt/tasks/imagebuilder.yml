@@ -47,18 +47,12 @@
     chdir: "{{ imagebuild_dir }}"
     cmd: grep -oP 'CONFIG_TARGET_ARCH_PACKAGES="\K[^"]+' .config
   register: instr_set_result
-  when: 'instr_set is not defined and feed_version is defined'
+  when: 'instr_set is not defined'
 
 - name: Extract Instruction set if needed
   set_fact:
     instr_set: "{{ instr_set_result.stdout_lines|first }}"
-  when: 'instr_set is not defined and feed_version is defined'
-
-- name: Insert falter feed
-  lineinfile:
-    path: "{{ imagebuild_dir }}/repositories.conf"
-    line: "{{ feed | replace('__INSTR_SET__', instr_set) | replace('__FEED_VERSION__', feed_version) }}"
-  when: 'feed_version is defined'
+  when: 'instr_set is not defined'
 
 - name: Disable Signature verification if required
   lineinfile:
