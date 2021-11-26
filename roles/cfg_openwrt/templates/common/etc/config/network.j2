@@ -12,9 +12,9 @@ config interface 'loopback'
 {% endif %}
 
 {% if dsa_ports is defined %}
-  {% include './common/config/dsa.network.inc' %}
+  {% include './common/etc/config/dsa.network.inc' %}
 {% elif switch_ports|default(0) > 0 %}
-  {% include './common/config/swconfig.network.inc' %}
+  {% include './common/etc/config/swconfig.network.inc' %}
 {% endif %}
 
 
