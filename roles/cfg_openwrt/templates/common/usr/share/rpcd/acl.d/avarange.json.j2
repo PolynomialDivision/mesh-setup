@@ -1,0 +1,17 @@
+{
+	"avarange-daemon": {
+		"description": "Grant UBUS and UCI access for avarange",
+		"read": {
+			"uci": [ "avarange-daemon" ],
+			"ubus": {
+				"avarange": [ "*" ]
+			}
+		},
+		"write": {
+			"uci": [ "avarange-daemon" ],
+			"ubus": {
+				"avarange": [ "*" ]
+			}
+		}
+	}
+}

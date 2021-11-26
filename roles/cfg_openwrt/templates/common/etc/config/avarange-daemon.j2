@@ -1,0 +1,12 @@
+{% for network in networks %}
+config setting 'anchor'
+	option node_id '{{ network['prefix'] | ipsubnet('32', network['assignments'][inventory_hostname]) | ipaddr('address') | split('.') | last }}'
+	option channel '{{ avarange['channel'] }}'
+	option txPreambleLength '{{ avarange['txPreambleLength'] }}'
+	option txCode '{{ avarange['txCode'] }}'
+	option rxCode '{{ avarange['rxCode'] }}'
+	option dataRate '{{ avarange['dataRate'] }}'
+	option power '{{ avarange['power'] }}'
+	option measurement_path '{{ avarange['measurement_path'] }}'
+	option measurement_collect_node '{{ avarange['measurement_collect_node'] }}'
+{% endfor %}

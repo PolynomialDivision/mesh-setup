@@ -30,7 +30,7 @@
     file: render_subdir.yml
     apply:
       tags: always
-  loop: ['/etc/', '/etc/config','/etc/dropbear', '/etc/init.d', '/etc/crontabs']
+  loop: ['/usr/share/rpcd/acl.d','/etc/', '/etc/config','/etc/dropbear', '/etc/init.d', '/etc/crontabs']
   loop_control:
     loop_var: subdir
   tags: always
