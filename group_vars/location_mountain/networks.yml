@@ -9,10 +9,16 @@ networks:
     ipv6_subprefix: 0
     mesh_metric: 2048
     mesh_iface: mesh
-    prefix: 10.0.0.0/24
+    prefix: 10.12.2.0/24
     assignments:
-      mountain-ap1: 1
       mountain-ap2: 2
+      mountain-ap3: 3
+      mountain-ap4: 4
+      mountain-ap5: 5
+      mountain-ap6: 6
     ipv6_assigments:
-      mountain-ap1: 1
-      mountain-ap2: 2
+      mountain-ap2: 3
+      mountain-ap3: 3
+      mountain-ap4: 4
+      mountain-ap5: 5
+      mountain-ap6: 6
