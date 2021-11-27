@@ -12,3 +12,4 @@ role_corerouter__packages__to_merge:
   - spi-tools
   - spidev-test
   - curl
+  - uhttpd-mod-ubus
