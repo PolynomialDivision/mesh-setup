@@ -11,4 +11,4 @@ role_corerouter__packages__to_merge:
   - kmod-mmc-spi
   - spi-tools
   - spidev-test
-#  - curl
+  - curl
