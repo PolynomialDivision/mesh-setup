@@ -1,0 +1,15 @@
+Host mountain-ap101
+    Hostname 10.12.2.101
+    User root
+
+Host mountain-ap103
+    Hostname 10.12.2.103
+    User root
+
+Host mountain-ap104
+    Hostname 10.12.2.104
+    User root
+
+Host mountain-ap107
+    Hostname 10.12.2.107
+    User root

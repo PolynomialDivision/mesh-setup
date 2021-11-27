@@ -41,3 +41,23 @@ ansible-playbook play.yml --tags flash
 Done!
 
 ```
+
+### Avarange: How to deploy images?
+
+Add ssh config to `/ssh_config` that match your configured hostname (e.g. `mountain-ap101`).
+
+```
+Host mountain-ap101
+    Hostname 10.12.2.101
+    User root
+```
+
+Make sure that the device has `python3` installed, since it is required for using ansible remotely!
+
+Than just run:
+
+```
+ansible-playbook deploy.yml
+```
+
+(Attention: The sysupgrade might not register that it was successfully and loop forever.)
