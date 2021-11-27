@@ -16,9 +16,17 @@ networks:
       mountain-ap4: 4
       mountain-ap5: 5
       mountain-ap6: 6
+      mountain-ap101: 101
+      mountain-ap103: 103
+      mountain-ap104: 104
+      mountain-ap107: 107
     ipv6_assigments:
       mountain-ap2: 3
       mountain-ap3: 3
       mountain-ap4: 4
       mountain-ap5: 5
       mountain-ap6: 6
+      mountain-ap101: 101
+      mountain-ap103: 103
+      mountain-ap104: 104
+      mountain-ap107: 107
