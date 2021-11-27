@@ -5,3 +5,10 @@ role_corerouter__packages__to_merge:
   - luci-app-babeld
   - "-wpad-basic-wolfssl"
   - wpad
+  - kmod-spi-dev
+  - kmod-spi-dev
+  - kmod-spi-gpio
+  - kmod-mmc-spi
+  - spi-tools
+  - spidev-test
+#  - curl

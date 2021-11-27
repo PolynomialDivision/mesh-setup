@@ -7,4 +7,4 @@ avarange:
   dataRate: 1
   power: '0xfdfdfdfd'
   measurement_path: '/var/lib/avarange-daemon/'
-  measurement_collect_node: '10.12.1.101'
+  measurement_collect_node: '10.12.2.101'
