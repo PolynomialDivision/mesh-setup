@@ -1,10 +1,11 @@
 ---
 avarange:
-  channel: 5
+  channel: '5'
   txPreambleLength: 'DWT_PLEN_72'
-  txCode: 9
-  rxCode: 9
-  dataRate: 1
+  txCode: '9'
+  rxCode: '9'
+  dataRate: 'DWT_BR_6M8'
   power: '0xfdfdfdfd'
-  measurement_path: '/var/lib/avarange-daemon/'
-  measurement_collect_node: '10.12.2.101'
+  sfdTimeout: '73'
+  measurement_collect_node: '10.12.1.101'
+  participating_anchor_ips: '10.12.2.101 10.12.2.103 10.12.2.104 10.12.2.107'
