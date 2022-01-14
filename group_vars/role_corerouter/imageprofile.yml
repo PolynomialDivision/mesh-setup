@@ -16,3 +16,9 @@ role_corerouter__packages__to_merge:
   - uhttpd-mod-ubus
   - python3
   - vim-fuller
+  - prometheus-node-exporter-lua
+  - prometheus-node-exporter-lua-nat_traffic
+  - prometheus-node-exporter-lua-netstat
+  - prometheus-node-exporter-lua-openwrt
+  - prometheus-node-exporter-lua-wifi
+  - prometheus-node-exporter-lua-wifi_stations
