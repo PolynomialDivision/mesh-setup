@@ -1,7 +1,0 @@
----
-
-location: mountain
-role: corerouter
-target: "mediatek/mt7622"
-model: "bananapi_bpi-r64"
-

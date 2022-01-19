@@ -19,6 +19,8 @@ networks:
       mountain-ap101: 101
       mountain-ap103: 103
       mountain-ap104: 104
+      mountain-ap105: 105
+      mountain-ap106: 106
       mountain-ap107: 107
     ipv6_assigments:
       mountain-ap2: 3
@@ -29,4 +31,6 @@ networks:
       mountain-ap101: 101
       mountain-ap103: 103
       mountain-ap104: 104
+      mountain-ap105: 105
+      mountain-ap106: 106
       mountain-ap107: 107

@@ -10,6 +10,14 @@ Host mountain-ap104
     Hostname 10.12.2.104
     User root
 
+Host mountain-ap105
+    Hostname 10.12.2.105
+    User root
+
+Host mountain-ap106
+    Hostname 10.12.2.106
+    User root
+
 Host mountain-ap107
     Hostname 10.12.2.107
     User root

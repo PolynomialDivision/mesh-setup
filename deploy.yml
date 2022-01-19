@@ -3,7 +3,7 @@
     - name: "Copy new image"
       copy: src=/tmp/ansible-openwrt/images/{{inventory_hostname}}.itb dest=/tmp/{{inventory_hostname}}.itb unsafe_writes=yes
     - name: "Start sysupgrade"
-      shell: sysupgrade -q -n /tmp/{{inventory_hostname}}.itb
+      shell: /sbin/sysupgrade -q -n /tmp/{{inventory_hostname}}.itb
       async: 2592000
       poll: 0
     - name: wait for reboot
