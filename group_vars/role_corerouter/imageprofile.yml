@@ -25,6 +25,7 @@ role_corerouter__packages__to_merge:
   - python3-ubus
   - python3-uci
   - python3-pymysql
+  - python3-requests
   - coreutils-nohup
   - vim-fuller
   - telegraf-full
