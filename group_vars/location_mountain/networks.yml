@@ -11,26 +11,24 @@ networks:
     mesh_iface: mesh
     prefix: 10.12.2.0/24
     assignments:
-      mountain-ap2: 2
-      mountain-ap3: 3
-      mountain-ap4: 4
-      mountain-ap5: 5
-      mountain-ap6: 6
       mountain-ap101: 101
+      mountain-ap102: 102
       mountain-ap103: 103
       mountain-ap104: 104
       mountain-ap105: 105
       mountain-ap106: 106
       mountain-ap107: 107
+      mountain-ap108: 108
+      mountain-ap109: 109
+      mountain-ap110: 110
     ipv6_assigments:
-      mountain-ap2: 3
-      mountain-ap3: 3
-      mountain-ap4: 4
-      mountain-ap5: 5
-      mountain-ap6: 6
       mountain-ap101: 101
+      mountain-ap102: 102
       mountain-ap103: 103
       mountain-ap104: 104
       mountain-ap105: 105
       mountain-ap106: 106
       mountain-ap107: 107
+      mountain-ap108: 108
+      mountain-ap109: 109
+      mountain-ap110: 110
