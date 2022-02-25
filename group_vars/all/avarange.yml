@@ -1,12 +1,11 @@
 ---
 avarange:
-    channel: '5'
-    txPreambleLength: 'DWT_PLEN_72'
+    channel: '2'
+    txPreambleLength: 'DWT_PLEN_128'
     txCode: '9'
     rxCode: '9'
-    dataRate: 'DWT_BR_6M8'
+    dataRate: 'DWT_BR_110K'
     power: '0xfdfdfdfd'
-    sfdTimeout: '73'
-    measurement_collect_node: '10.12.1.101'
-    participating_anchor_ips: '10.12.2.101 10.12.2.103 10.12.2.104 10.12.2.107'
+    sfdTimeout: '1075'
+    participating_anchor_ips: '10.12.2.101 10.12.2.103 10.12.2.104 10.12.2.105 10.12.2.106 10.12.2.107'
 
