@@ -1,0 +1,6 @@
+---
+
+location: mountain
+role: gateway
+target: "mediatek/mt7622"
+model: "bananapi_bpi-r64"
