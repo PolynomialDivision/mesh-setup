@@ -36,3 +36,4 @@ role_corerouter__packages__to_merge:
   - prometheus-node-exporter-lua-openwrt
   - prometheus-node-exporter-lua-wifi
   - prometheus-node-exporter-lua-wifi_stations
+  - block-mount
