@@ -1,6 +1,7 @@
 [agent]
   flush_interval = "15s"
   interval = "15s"
+  metric_buffer_limit = 100000
 
 [[inputs.prometheus]]
   urls = ["http://127.0.0.1:9100/metrics"]
@@ -25,7 +26,7 @@
   csv_column_names = ["seq", "experiment", "timestamp", "sender_id", "receiver_id", "distance", "duration", "channel", "txpreambel", "txcode", "rxcode", "datarate", "txpower", "rssi", "lat", "lon"]
   csv_tag_columns = ["sender_id", "receiver_id", "experiment"]
   csv_timestamp_column = "timestamp"
-  csv_timestamp_format = "unix"
+  csv_timestamp_format = "unix_us"
 
 [[outputs.influxdb]]
   database = "avarange"
