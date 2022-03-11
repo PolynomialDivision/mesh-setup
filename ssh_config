@@ -1,8 +1,4 @@
 Host mountain-gateway
-    Hostname 10.12.2.100
-    User root
-
-Host mountain-ap101
     Hostname 10.12.2.101
     User root
 

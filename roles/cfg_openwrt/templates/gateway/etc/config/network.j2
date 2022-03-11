@@ -3,6 +3,7 @@ config interface 'loopback'
 	option proto 'static'
 	option ipaddr '127.0.0.1'
 	option netmask '255.0.0.0'
+        option dns '{{ dns_servers | join(' ') }}'
 
 config globals 'globals'
 	option ula_prefix 'fd12:6e63:4d3f::/48'
@@ -58,4 +59,4 @@ config wireguard_vpn 'wgserver'
 
 config interface 'mesh_network'
 	option proto 'static'
-	option ipaddr '10.12.2.1/32'
+	option ipaddr '10.12.2.101/32'
