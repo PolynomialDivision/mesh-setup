@@ -1,30 +1,38 @@
-#jinja2: trim_blocks: "true", lstrip_blocks: "true"
-{% if ipv6_prefix is defined %}
 package babeld
 
 config general
-	option 'local_port' '33123'
-	option 'ipv6_subtrees' 'true'
-	option 'ubus_bindings' 'true'
+        option 'local_port' '33123'
+        option 'ipv6_subtrees' 'true'
+        option 'ubus_bindings' 'true'
 
 config interface
-	option 'ifname' 'wlan2-mesh'
+        option 'ifname' 'wlan2-mesh'
 
-{% for network in networks %}
-config filter
-	option 'type'	'redistribute'
-	option 'ip'		'{{ network['prefix'] | ipsubnet('32', network['assignments'][inventory_hostname]) }}'
-	option 'local'  'true'
-	option 'eq'		'32'
-{% endfor %}
+config interface
+        option 'ifname' 'vpn'
 
 config filter
-	option 'type'	'redistribute'
-	option 'ip'	'{{ ipv6_prefix }}'
-	option 'eq'	'{{ ipv6_prefix | ipaddr('prefix') }}'
+        option 'type'   'redistribute'
+        option 'ip'     '0.0.0.0/0'
+        option 'eq'     '0'
 
 config filter
-	option 'type'   'redistribute'
-	option 'local'  'true'
-	option 'action' 'deny'
-{% endif %}
+        option 'type'   'redistribute'
+        option 'ip'     '10.12.0.0/24'
+        option 'eq'     '24'
+
+config filter
+        option 'type'   'redistribute'
+        option 'ip'     '10.12.2.1/32'
+        option 'local'  'true'
+        option 'eq'     '32'
+
+config filter
+        option 'type'   'redistribute'
+        option 'ip'     '10.12.0.0/24'
+        option 'eq'     '24'
+
+config filter
+        option 'type'   'redistribute'
+        option 'local'  'true'
+        option 'action' 'deny'
