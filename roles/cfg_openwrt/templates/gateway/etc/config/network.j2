@@ -60,3 +60,6 @@ config wireguard_vpn 'wgserver'
 config interface 'mesh_network'
 	option proto 'static'
 	option ipaddr '10.12.2.101/32'
+
+config interface 'uplink_network'
+	option proto 'dhcp'
