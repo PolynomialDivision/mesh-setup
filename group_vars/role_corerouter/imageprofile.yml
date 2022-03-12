@@ -3,6 +3,7 @@ role_corerouter__packages__to_merge:
   - avarange-daemon
   - avarange-dcd
   - babeld
+  - luci-ssl
   - luci-app-babeld
   - "-wpad-basic-wolfssl"
   - wpad
