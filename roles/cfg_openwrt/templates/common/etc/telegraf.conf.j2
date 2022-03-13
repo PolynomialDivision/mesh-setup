@@ -23,7 +23,7 @@
   ## BUG in telegraf CSV: need to delete header row manually for now and ignore it here
   #csv_header_row_count = 1
   ## If BUG resolved csv_column_names can be removed
-  csv_column_names = ["seq", "experiment", "timestamp", "sender_id", "receiver_id", "distance", "duration", "channel", "txpreambel", "txcode", "rxcode", "datarate", "txpower", "rssi", "lat", "lon"]
+  csv_column_names = ["seq", "experiment", "timestamp", "sender_id", "receiver_id", "distance", "duration", "channel", "txpreambel", "txcode", "rxcode", "datarate", "txpower", "rssi", "rssi_first_path", "lat", "lon"]
   csv_tag_columns = ["sender_id", "receiver_id", "experiment"]
   csv_timestamp_column = "timestamp"
   csv_timestamp_format = "unix_us"
