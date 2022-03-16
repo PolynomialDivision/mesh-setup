@@ -6,6 +6,7 @@ avarange:
     rxCode: '9'
     dataRate: 'DWT_BR_110K'
     power: '0x67676767'
+    prf: 'DWT_PRF_16M'
     sfdTimeout: '1075'
     participating_anchor_ips: '10.12.2.101 10.12.2.103 10.12.2.104 10.12.2.105 10.12.2.106 10.12.2.107'
 
